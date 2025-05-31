@@ -1,6 +1,5 @@
 timestamp,system_name,platform,processor,primes_time,pi_time,hash_time
-2025-05-23 16:38:26,Dell XPS 13 Plus,Windows,"Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",2.0792,0.1575,3.1303
-2025-05-23 16:39:22,Dell XPS 13 Plus,Windows,"Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",2.0703,0.1050,2.9073
-2025-05-23 16:40:30,Dell XPS 13 Plus,Windows,"Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",2.0508,0.1016,3.1597
-2025-05-25 22:35:23,Macbook M3 pro,Darwin,arm,1.2361,0.0617,1.3439
-2025-05-25 22:35:33,Macbook M3 pro,Darwin,arm,1.2808,0.0622,1.3482
+
+
+
+

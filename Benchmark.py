@@ -83,7 +83,7 @@ def main():
     primes_time, prime_count = benchmark_primes(1_000_000)
     print(f"Primes up to 1,000,000: {prime_count} primes in {primes_time:.4f} seconds")
 
-    pi_time, pi_val = benchmark_pi_estimation(1_000_000)
+    pi_time, pi_val = benchmark_pi_estimation(10_000_000)
     print(f"Pi estimation: {pi_val:.5f} in {pi_time:.4f} seconds")
 
     hash_time, hash_sample = benchmark_hashing(5_000_000)

@@ -1,93 +1,65 @@
-# CPU Benchmarks
-This is a collection of benchmark functions to run across my machines.
+# CPU Benchmark Suite
 
-## Features
+A lightweight Python-based CPU benchmarking tool that measures computational performance across different systems using a text-based user interface.
 
-- **Interactive Menu System**: Easy-to-use interface for running benchmarks and viewing results
-- **Git-Friendly Storage**: Results stored in JSONL format (JSON Lines) for clean git diffs and zero merge conflicts
-- **Pretty Stats Table**: View all benchmark results in a formatted table
-- **Isolated Execution**: No internet connection required - fully offline capable
+## Overview
 
-## Benchmark Tests
+This tool runs a suite of four benchmark tests to evaluate CPU and memory performance, collecting statistical data across multiple runs to ensure reliability. Results are stored in JSONL format for easy tracking and comparison between systems.
 
-### Prime Number Benchmark
-
-This test counts all prime numbers up to 1,000,000 using a basic trial division algorithm. It is CPU-bound and single-threaded, making it a good indicator of raw integer performance and control flow efficiency in the interpreter.
-
-**What It Measures:**
-- Integer math performance
-- Branching logic efficiency
-- CPU cache/memory access under loop-heavy workloads
-
-### Pi Estimation (Monte Carlo Method)
-
-This benchmark uses the Monte Carlo method to estimate the value of π by randomly generating 10,000,000 points inside a unit square and checking how many fall within the unit circle. It's a good test of floating-point math performance and random number generation speed.
-
-**What It Measures:**
-- Floating-point operation throughput
-- Random number generator performance
-- Tight loop efficiency
-
-### SHA-256 Hashing Benchmark
-
-This test runs 5,000,000 rounds of SHA-256 hashing on a small data block. It's a compute-heavy task that stresses the CPU's arithmetic logic unit (ALU) and evaluates performance in workloads similar to password hashing, cryptography, or blockchain verification.
-
-**What It Measures:**
-- Byte-level computation performance
-- Repetitive hash function overhead
-- Interpreter and C library integration
-
-## Usage
-
-### Running the Benchmark Suite
-
-Simply run the script with Python:
+## Running the Application
 
 ```bash
 python Benchmark.py
 ```
 
-This will launch an interactive menu with the following options:
+The TUI presents a menu with four options:
+1. **Run Benchmark** - Execute all benchmark tests and save results
+2. **View Stats** - Display historical benchmark results in tabular format
+3. **Delete Results by System Name** - Remove specific benchmark entries
+4. **Exit** - Close the application
 
-1. **Run Benchmark** - Execute all three benchmark tests and save results
-2. **View Stats** - Display all previous benchmark results in a formatted table
-3. **Exit** - Close the application
+## Benchmark Tests
 
-### Menu Options
+### 1. Prime Number Calculation
+Tests integer arithmetic and loop efficiency by finding all prime numbers up to 1,000,000 using trial division. This benchmark measures raw CPU computational throughput for integer operations.
 
-#### 1. Run Benchmark
-When you select this option, you'll be prompted to enter a system name (e.g., "Ubuntu Desktop", "MacBook Pro", "Dell Laptop"). The script will then:
-- Run all three benchmarks sequentially
-- Display timing results in real-time
-- Save results to `cpu_benchmark_results.jsonl`
+**Theory**: Prime number calculation is CPU-bound and benefits from high clock speeds and efficient branch prediction. Expected result: 78,498 primes.
 
-#### 2. View Stats
-Displays all benchmark runs in a formatted table showing:
-- Timestamp of each run
-- System name
-- Platform (Linux, Darwin, Windows)
-- Processor architecture
-- Individual benchmark timings
+### 2. Pi Estimation (Monte Carlo Method)
+Estimates π using 10,000,000 random points and the Monte Carlo method (checking if points fall within a unit circle). Tests floating-point performance and random number generation.
 
-#### 3. Exit
-Safely closes the application
+**Theory**: This benchmark stresses floating-point units (FPU) and measures how efficiently the CPU handles probabilistic computations. Expected result: π ≈ 3.14159.
 
-## Results Storage
+### 3. SHA-256 Hashing
+Performs 5,000,000 rounds of recursive SHA-256 hashing. Tests cryptographic performance and the CPU's ability to handle bitwise operations.
 
-Results are stored in `cpu_benchmark_results.jsonl` using JSON Lines format. Each line is a complete JSON object representing one benchmark run:
+**Theory**: Hashing is CPU-intensive and benefits from specialized CPU instructions (like SHA extensions on modern processors). This benchmark measures sustained computational load.
 
-```json
-{"timestamp": "2025-11-02 16:36:55", "system_name": "Ubuntu", "platform": "Linux", "processor": "x86_64", "primes_time": 2.0039, "pi_time": 1.2477, "hash_time": 1.5036}
-```
+### 4. Memory Bandwidth
+Creates a list of 5,000,000 integers (~40MB) and performs 10 iterations of sequential reads (sum) and writes (reverse). Tests memory subsystem performance.
 
-### Why JSONL?
+**Theory**: Unlike the other tests, this measures memory bandwidth and cache efficiency rather than pure CPU speed. Performance depends on RAM speed, cache size, and memory controller efficiency.
 
-- **Git-friendly**: Each benchmark run is a single line, creating clean diffs
-- **Append-only**: No merge conflicts when multiple machines add results
-- **Human-readable**: Easy to inspect and parse
-- **Portable**: Works across all platforms and can be committed to git
+## Features
+
+- **Statistical Analysis**: Each test runs 3 times, reporting median, min, max, and standard deviation
+- **System Load Detection**: Warns if high system load may affect results (Unix-like systems)
+- **Cross-Platform**: Supports Windows, macOS, and Linux
+- **CPU Frequency Detection**: Automatically detects and logs CPU clock speed
+- **Historical Tracking**: Compare results across runs and systems
+- **Validation**: Verifies benchmark output correctness to detect computational errors
 
 ## Requirements
 
 - Python 3.6+
 - Standard library only (no external dependencies)
+
+## Results Storage
+
+Benchmark results are saved to `cpu_benchmark_results.jsonl` with metadata including:
+- Timestamp
+- System name
+- Platform and processor information
+- Python version
+- CPU core count and frequency
+- Statistical measurements for each test
